@@ -19,7 +19,7 @@ import java.util.List;
 
 
 /**
- * Created by zhouwei on 17/5/31.
+ * Created by dl
  */
 
 public class NormalViewPagerFragment extends Fragment {

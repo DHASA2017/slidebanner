@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/viewPager_item_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="fitXY" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|center">
+        <TextView
+            android:id="@+id/goto_login"
+            android:layout_marginBottom="25dip"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:padding="10dip"
+            android:background="@drawable/border_red_radius5"
+            android:textSize="15sp"
+            android:textColor="#000000"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="立即体验" />
+    </LinearLayout>
+</RelativeLayout>

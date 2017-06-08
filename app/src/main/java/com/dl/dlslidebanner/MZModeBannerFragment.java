@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by zhouwei on 17/5/31.
+ * Created by dl
  */
 
 public class MZModeBannerFragment extends Fragment{

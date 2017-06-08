@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by dl on 2017/6/7.
+ * Created by dl on 2017/6/7
  */
 
 public class DLBannerView<T> extends RelativeLayout {
@@ -46,7 +46,7 @@ public class DLBannerView<T> extends RelativeLayout {
     private boolean mIsCanLoop = true;// 是否轮播图片
     private LinearLayout mIndicatorContainer;//indicator容器
     private ArrayList<ImageView> mIndicators = new ArrayList<>();
-    //mIndicatorRes[0] 为为选中，mIndicatorRes[1]为选中
+    //mIndicatorRes[0] 为未选中，mIndicatorRes[1]为选中
     private int []mIndicatorRes= new int[]{R.drawable.indicator_normal, R.drawable.indicator_selected};
     private int mIndicatorPaddingLeft = 0;
     private int mIndicatorPaddingRight = 0;
@@ -90,6 +90,7 @@ public class DLBannerView<T> extends RelativeLayout {
         mIndicatorAlign = typedArray.getInt(R.styleable.DLBannerView_indicatorAlign,1);
         mIndicatorPaddingLeft = typedArray.getDimensionPixelSize(R.styleable.DLBannerView_indicatorPaddingLeft,0);
         mIndicatorPaddingRight = typedArray.getDimensionPixelSize(R.styleable.DLBannerView_indicatorPaddingRight,0);
+        typedArray.recycle();
     }
 
 
@@ -157,7 +158,7 @@ public class DLBannerView<T> extends RelativeLayout {
             if(mIsAutoPlay){
                 mCurrentItem = mViewPager.getCurrentItem();
                 mCurrentItem++;
-                if(mCurrentItem == mAdapter.getCount() - 1){
+                if(mCurrentItem == mAdapter.getCount()){//mCurrentItem不存在了才能立刻设置回0，否则可能会出现略过最后一页的问题
                     mCurrentItem = 0;
                     mViewPager.setCurrentItem(mCurrentItem,false);
                     mHandler.postDelayed(this,mDelayedTime);
@@ -368,8 +369,10 @@ public class DLBannerView<T> extends RelativeLayout {
         LayoutParams layoutParams = (LayoutParams) mIndicatorContainer.getLayoutParams();
         if(indicatorAlign == IndicatorAlign.LEFT){
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+            layoutParams.setMargins(dpToPx(16),0,0,0);
         }else if(indicatorAlign == IndicatorAlign.RIGHT){
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+            layoutParams.setMargins(0,0,dpToPx(16),0);
         }else{
             layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
         }
@@ -450,8 +453,8 @@ public class DLBannerView<T> extends RelativeLayout {
                 return currentItem;
             }
             // 直到找到从0开始的位置
-            while (currentItem % getRealCount() == 0){
-                currentItem++;
+            while (currentItem % getRealCount() != 0){
+                ++currentItem;
             }
             return currentItem;
         }
